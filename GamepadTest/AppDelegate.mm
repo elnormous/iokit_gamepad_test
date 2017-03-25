@@ -13,11 +13,6 @@
 #import "AppDelegate.h"
 #import "IOKit/hid/IOHIDManager.h"
 
-@interface AppDelegate ()
-
-@property (weak) IBOutlet NSWindow *window;
-@end
-
 @implementation AppDelegate
 
 IOHIDManagerRef hidManager;
@@ -185,7 +180,7 @@ static void deviceRemoved(void *ctx, IOReturn inResult, void *inSender, IOHIDDev
 
     hidManager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
 
-    IOHIDManagerSetDeviceMatchingMultiple(hidManager, (__bridge CFArrayRef)criteria);
+    IOHIDManagerSetDeviceMatchingMultiple(hidManager, (CFArrayRef)criteria);
     IOReturn ret = IOHIDManagerOpen(hidManager, kIOHIDOptionsTypeNone);
     if (ret != kIOReturnSuccess)
     {
@@ -198,8 +193,8 @@ static void deviceRemoved(void *ctx, IOReturn inResult, void *inSender, IOHIDDev
         std::cout << "Manager created" << std::endl;
 
         IOHIDManagerScheduleWithRunLoop(hidManager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-        IOHIDManagerRegisterDeviceMatchingCallback(hidManager, deviceAdded, (__bridge void *)self);
-        IOHIDManagerRegisterDeviceRemovalCallback(hidManager, deviceRemoved, (__bridge void *)self);
+        IOHIDManagerRegisterDeviceMatchingCallback(hidManager, deviceAdded, nullptr);
+        IOHIDManagerRegisterDeviceRemovalCallback(hidManager, deviceRemoved, nullptr);
     }
 }
 
