@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		303B03511E86CDCA008D3591 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 303B03501E86CDCA008D3591 /* AppDelegate.mm */; };
+		303B03541E86CDCA008D3591 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 303B03531E86CDCA008D3591 /* main.m */; };
+		303B03561E86CDCA008D3591 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 303B03551E86CDCA008D3591 /* Assets.xcassets */; };
+		303B03591E86CDCA008D3591 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 303B03571E86CDCA008D3591 /* MainMenu.xib */; };
+		303B03621E86CDED008D3591 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 303B03611E86CDED008D3591 /* IOKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		303B034C1E86CDCA008D3591 /* GamepadTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamepadTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		303B034F1E86CDCA008D3591 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		303B03501E86CDCA008D3591 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		303B03531E86CDCA008D3591 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		303B03551E86CDCA008D3591 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		303B03581E86CDCA008D3591 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		303B035A1E86CDCA008D3591 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		303B03611E86CDED008D3591 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		303B03491E86CDCA008D3591 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				303B03621E86CDED008D3591 /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		303B03431E86CDCA008D3591 = {
+			isa = PBXGroup;
+			children = (
+				303B034E1E86CDCA008D3591 /* GamepadTest */,
+				303B034D1E86CDCA008D3591 /* Products */,
+				303B03601E86CDED008D3591 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		303B034D1E86CDCA008D3591 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				303B034C1E86CDCA008D3591 /* GamepadTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		303B034E1E86CDCA008D3591 /* GamepadTest */ = {
+			isa = PBXGroup;
+			children = (
+				303B034F1E86CDCA008D3591 /* AppDelegate.h */,
+				303B03501E86CDCA008D3591 /* AppDelegate.mm */,
+				303B03551E86CDCA008D3591 /* Assets.xcassets */,
+				303B03571E86CDCA008D3591 /* MainMenu.xib */,
+				303B035A1E86CDCA008D3591 /* Info.plist */,
+				303B03521E86CDCA008D3591 /* Supporting Files */,
+			);
+			path = GamepadTest;
+			sourceTree = "<group>";
+		};
+		303B03521E86CDCA008D3591 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				303B03531E86CDCA008D3591 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		303B03601E86CDED008D3591 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				303B03611E86CDED008D3591 /* IOKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		303B034B1E86CDCA008D3591 /* GamepadTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 303B035D1E86CDCA008D3591 /* Build configuration list for PBXNativeTarget "GamepadTest" */;
+			buildPhases = (
+				303B03481E86CDCA008D3591 /* Sources */,
+				303B03491E86CDCA008D3591 /* Frameworks */,
+				303B034A1E86CDCA008D3591 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GamepadTest;
+			productName = JoystickTest;
+			productReference = 303B034C1E86CDCA008D3591 /* GamepadTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		303B03441E86CDCA008D3591 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Elviss Strazdins";
+				TargetAttributes = {
+					303B034B1E86CDCA008D3591 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 303B03471E86CDCA008D3591 /* Build configuration list for PBXProject "GamepadTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 303B03431E86CDCA008D3591;
+			productRefGroup = 303B034D1E86CDCA008D3591 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				303B034B1E86CDCA008D3591 /* GamepadTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		303B034A1E86CDCA008D3591 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				303B03561E86CDCA008D3591 /* Assets.xcassets in Resources */,
+				303B03591E86CDCA008D3591 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		303B03481E86CDCA008D3591 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				303B03541E86CDCA008D3591 /* main.m in Sources */,
+				303B03511E86CDCA008D3591 /* AppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		303B03571E86CDCA008D3591 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				303B03581E86CDCA008D3591 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		303B035B1E86CDCA008D3591 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		303B035C1E86CDCA008D3591 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		303B035E1E86CDCA008D3591 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GamepadTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lv.elviss.GamepadTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		303B035F1E86CDCA008D3591 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = GamepadTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lv.elviss.GamepadTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		303B03471E86CDCA008D3591 /* Build configuration list for PBXProject "GamepadTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				303B035B1E86CDCA008D3591 /* Debug */,
+				303B035C1E86CDCA008D3591 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		303B035D1E86CDCA008D3591 /* Build configuration list for PBXNativeTarget "GamepadTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				303B035E1E86CDCA008D3591 /* Debug */,
+				303B035F1E86CDCA008D3591 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 303B03441E86CDCA008D3591 /* Project object */;
+}
