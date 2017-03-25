@@ -21,7 +21,6 @@
 @implementation AppDelegate
 
 IOHIDManagerRef hidManager;
-NSArray* criteria;
 
 static void deviceInput(void* ctx, IOReturn inResult, void* inSender, IOHIDValueRef value);
 
@@ -175,7 +174,7 @@ static void deviceRemoved(void *ctx, IOReturn inResult, void *inSender, IOHIDDev
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 
-    criteria = @[
+    NSArray* criteria = @[
                  @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
                     @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_Joystick) },
                  @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
