@@ -96,7 +96,11 @@ public:
         IOHIDDeviceRegisterInputValueCallback(device, deviceInput, this);
     }
 
-    const std::vector<GamepadElement>& getElements();
+    const std::map<IOHIDElementCookie, GamepadElement>& getElements()
+    {
+        return elements;
+    }
+
     const GamepadElement* getElementByCookie(IOHIDElementCookie cookie) const
     {
         auto i = elements.find(cookie);
@@ -168,15 +172,14 @@ static void deviceRemoved(void *ctx, IOReturn inResult, void *inSender, IOHIDDev
 
 -(void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-
     NSArray* criteria = @[
-                 @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
-                    @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_Joystick) },
-                 @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
-                    @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_GamePad) },
-                 @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
-                    @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_MultiAxisController) }
-                 ];
+                          @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
+                              @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_Joystick) },
+                          @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
+                              @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_GamePad) },
+                          @{ @kIOHIDDeviceUsagePageKey : @(kHIDPage_GenericDesktop),
+                              @kIOHIDDeviceUsageKey : @(kHIDUsage_GD_MultiAxisController) }
+                          ];
 
     hidManager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
 
