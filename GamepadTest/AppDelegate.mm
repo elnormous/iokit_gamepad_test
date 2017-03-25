@@ -24,6 +24,7 @@ class GamepadElement
 public:
     enum class Type
     {
+        NONE,
         BUTTON,
         HAT,
         ANALOG
@@ -70,7 +71,7 @@ public:
 
 protected:
     IOHIDElementRef element = Nil;
-    Type type;
+    Type type = Type::NONE;
     CFIndex min = 0;
     CFIndex max = 0;
 };
