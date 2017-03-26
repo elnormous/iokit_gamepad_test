@@ -82,6 +82,13 @@ public:
     Gamepad(IOHIDDeviceRef aDevice):
         device(aDevice)
     {
+        NSString* productKey = (NSString*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductKey));
+
+        if (productKey)
+        {
+            name = [productKey cStringUsingEncoding:NSUTF8StringEncoding];
+        }
+
         CFArrayRef elementArray = IOHIDDeviceCopyMatchingElements(device, NULL, kIOHIDOptionsTypeNone);
 
         for (CFIndex i = 0; i < CFArrayGetCount(elementArray); i++)
@@ -95,6 +102,11 @@ public:
         CFRelease(elementArray);
 
         IOHIDDeviceRegisterInputValueCallback(device, deviceInput, this);
+    }
+
+    const std::string& getName() const
+    {
+        return name;
     }
 
     const std::map<IOHIDElementCookie, GamepadElement>& getElements()
@@ -117,6 +129,7 @@ public:
 protected:
     IOHIDDeviceRef device = Nil;
     std::map<IOHIDElementCookie, GamepadElement> elements;
+    std::string name;
 };
 
 std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
