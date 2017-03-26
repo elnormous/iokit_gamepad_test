@@ -83,10 +83,15 @@ public:
         device(aDevice)
     {
         NSString* productKey = (NSString*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductKey));
-
         if (productKey)
         {
             name = [productKey cStringUsingEncoding:NSUTF8StringEncoding];
+        }
+
+        NSNumber* deviceId = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDUniqueIDKey));
+        if (deviceId)
+        {
+            uniqueId = [deviceId integerValue];
         }
 
         CFArrayRef elementArray = IOHIDDeviceCopyMatchingElements(device, NULL, kIOHIDOptionsTypeNone);
@@ -107,6 +112,11 @@ public:
     const std::string& getName() const
     {
         return name;
+    }
+
+    uint64_t getUniqueId() const
+    {
+        return uniqueId;
     }
 
     const std::map<IOHIDElementCookie, GamepadElement>& getElements()
@@ -130,6 +140,7 @@ protected:
     IOHIDDeviceRef device = Nil;
     std::map<IOHIDElementCookie, GamepadElement> elements;
     std::string name;
+    uint64_t uniqueId = 0;
 };
 
 std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
