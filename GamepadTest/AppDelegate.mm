@@ -88,10 +88,28 @@ public:
             name = [productKey cStringUsingEncoding:NSUTF8StringEncoding];
         }
 
-        NSNumber* deviceId = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDUniqueIDKey));
+        NSNumber* currentId = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDUniqueIDKey));
+        if (currentId)
+        {
+            uniqueId = [currentId integerValue];
+        }
+
+        NSNumber* deviceId = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDPhysicalDeviceUniqueIDKey));
         if (deviceId)
         {
-            uniqueId = [deviceId integerValue];
+            uniqueDeviceId = [deviceId integerValue];
+        }
+
+        NSNumber* vendor = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDVendorIDKey));
+        if (vendor)
+        {
+            vendorId = [vendor integerValue];
+        }
+
+        NSNumber* product = (NSNumber*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductIDKey));
+        if (product)
+        {
+            productId = [product integerValue];
         }
 
         CFArrayRef elementArray = IOHIDDeviceCopyMatchingElements(device, NULL, kIOHIDOptionsTypeNone);
@@ -119,6 +137,16 @@ public:
         return uniqueId;
     }
 
+    uint64_t getVendorId() const
+    {
+        return vendorId;
+    }
+
+    uint64_t getProductId() const
+    {
+        return productId;
+    }
+
     const std::map<IOHIDElementCookie, GamepadElement>& getElements()
     {
         return elements;
@@ -141,6 +169,9 @@ protected:
     std::map<IOHIDElementCookie, GamepadElement> elements;
     std::string name;
     uint64_t uniqueId = 0;
+    uint64_t uniqueDeviceId = 0;
+    uint64_t vendorId = 0;
+    uint64_t productId = 0;
 };
 
 std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
