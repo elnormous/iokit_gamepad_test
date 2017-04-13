@@ -244,6 +244,7 @@ public:
         }
         else if (vendorId == 0x045E && (productId == 0x028E || productId == 0x0719)) // Xbox 360 wired/wireless
         {
+            // TODO: check all the Xbox 360 like controllers
             usageMap[1] = A_BUTTON_USAGE_ID;
             usageMap[2] = B_BUTTON_USAGE_ID;
             usageMap[3] = X_BUTTON_USAGE_ID;
@@ -266,9 +267,27 @@ public:
             rightAnalogYMap = kHIDUsage_GD_Ry;
             rightTriggerAnalogMap = kHIDUsage_GD_Rz;
         }
-        else
+        else // Generic (based on Logitech Rum/blePad 2)
         {
-            std::cout << "Unknown vendor: " << vendorId << std::endl;
+            usageMap[1] = X_BUTTON_USAGE_ID;
+            usageMap[2] = A_BUTTON_USAGE_ID;
+            usageMap[3] = B_BUTTON_USAGE_ID;
+            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[5] = LEFT_SHOULDER_USAGE_ID;
+            usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
+            usageMap[7] = LEFT_TRIGGER_USAGE_ID;
+            usageMap[8] = RIGHT_TRIGGER_USAGE_ID;
+            usageMap[9] = BACK_BUTTON_USAGE_ID;
+            usageMap[10] = START_BUTTON_USAGE_ID;
+            usageMap[11] = LEFT_THUMBSTICK_USAGE_ID;
+            usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID;
+
+            leftAnalogXMap = kHIDUsage_GD_X;
+            leftAnalogYMap = kHIDUsage_GD_Y;
+            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
+            rightAnalogXMap = kHIDUsage_GD_Z;
+            rightAnalogYMap = kHIDUsage_GD_Rz;
+            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
         }
 
         CFArrayRef elementArray = IOHIDDeviceCopyMatchingElements(device, NULL, kIOHIDOptionsTypeNone);
