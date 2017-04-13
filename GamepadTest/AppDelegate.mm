@@ -170,107 +170,101 @@ public:
 
         std::fill(std::begin(usageMap), std::end(usageMap), NONE);
 
-        if (vendorId == 0x054C) // Sony
+        if (vendorId == 0x054C && productId == 0x0268) // Playstation 3 controller
         {
-            if (productId == 0x0268) // Playstation 3 controller
-            {
-                usageMap[1] = BACK_BUTTON_USAGE_ID; // Select
-                usageMap[2] = LEFT_THUMBSTICK_USAGE_ID; // L3
-                usageMap[3] = RIGHT_THUMBSTICK_USAGE_ID; // R3
-                usageMap[4] = START_BUTTON_USAGE_ID; // Start
-                usageMap[5] = DPAD_UP_USAGE_ID;
-                usageMap[6] = DPAD_RIGHT_USAGE_ID;
-                usageMap[7] = DPAD_DOWN_USAGE_ID;
-                usageMap[8] = DPAD_LEFT_USAGE_ID;
-                usageMap[9] = LEFT_TRIGGER_USAGE_ID; // L2
-                usageMap[10] = RIGHT_TRIGGER_USAGE_ID; // R2
-                usageMap[11] = LEFT_SHOULDER_USAGE_ID; // L1
-                usageMap[12] = RIGHT_SHOULDER_USAGE_ID; // R1
-                usageMap[13] = Y_BUTTON_USAGE_ID; // Triangle
-                usageMap[14] = B_BUTTON_USAGE_ID; // Circle
-                usageMap[15] = A_BUTTON_USAGE_ID; // Cross
-                usageMap[16] = X_BUTTON_USAGE_ID; // Square
+            usageMap[1] = BACK_BUTTON_USAGE_ID; // Select
+            usageMap[2] = LEFT_THUMBSTICK_USAGE_ID; // L3
+            usageMap[3] = RIGHT_THUMBSTICK_USAGE_ID; // R3
+            usageMap[4] = START_BUTTON_USAGE_ID; // Start
+            usageMap[5] = DPAD_UP_USAGE_ID;
+            usageMap[6] = DPAD_RIGHT_USAGE_ID;
+            usageMap[7] = DPAD_DOWN_USAGE_ID;
+            usageMap[8] = DPAD_LEFT_USAGE_ID;
+            usageMap[9] = LEFT_TRIGGER_USAGE_ID; // L2
+            usageMap[10] = RIGHT_TRIGGER_USAGE_ID; // R2
+            usageMap[11] = LEFT_SHOULDER_USAGE_ID; // L1
+            usageMap[12] = RIGHT_SHOULDER_USAGE_ID; // R1
+            usageMap[13] = Y_BUTTON_USAGE_ID; // Triangle
+            usageMap[14] = B_BUTTON_USAGE_ID; // Circle
+            usageMap[15] = A_BUTTON_USAGE_ID; // Cross
+            usageMap[16] = X_BUTTON_USAGE_ID; // Square
 
-                leftAnalogXMap = kHIDUsage_GD_X;
-                leftAnalogYMap = kHIDUsage_GD_Y;
-                leftTriggerAnalogMap = kHIDUsage_GD_Rx;
-                rightAnalogXMap = kHIDUsage_GD_Z;
-                rightAnalogYMap = kHIDUsage_GD_Rz;
-                rightTriggerAnalogMap = kHIDUsage_GD_Ry;
-            }
-            else if (productId == 0x05C4) // Playstation 4 controller
-            {
-                usageMap[1] = X_BUTTON_USAGE_ID; // Square
-                usageMap[2] = A_BUTTON_USAGE_ID; // Cross
-                usageMap[3] = B_BUTTON_USAGE_ID; // Circle
-                usageMap[4] = Y_BUTTON_USAGE_ID; // Triangle
-                usageMap[5] = LEFT_SHOULDER_USAGE_ID; // L1
-                usageMap[6] = RIGHT_SHOULDER_USAGE_ID; // R1
-                usageMap[7] = LEFT_TRIGGER_USAGE_ID; // L2
-                usageMap[8] = RIGHT_TRIGGER_USAGE_ID; // R2
-                usageMap[9] = BACK_BUTTON_USAGE_ID; // Share
-                usageMap[10] = START_BUTTON_USAGE_ID; // Options
-                usageMap[11] = LEFT_THUMBSTICK_USAGE_ID; // L3
-                usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID; // R3
-
-                leftAnalogXMap = kHIDUsage_GD_X;
-                leftAnalogYMap = kHIDUsage_GD_Y;
-                leftTriggerAnalogMap = kHIDUsage_GD_Rx;
-                rightAnalogXMap = kHIDUsage_GD_Z;
-                rightAnalogYMap = kHIDUsage_GD_Rz;
-                rightTriggerAnalogMap = kHIDUsage_GD_Ry;
-            }
+            leftAnalogXMap = kHIDUsage_GD_X;
+            leftAnalogYMap = kHIDUsage_GD_Y;
+            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
+            rightAnalogXMap = kHIDUsage_GD_Z;
+            rightAnalogYMap = kHIDUsage_GD_Rz;
+            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
         }
-        else if (vendorId == 0x045E) // Microsoft
+        else if (vendorId == 0x054C && productId == 0x05C4) // Playstation 4 controller
         {
-            if (productId == 0x028E || productId == 0x0719) // Xbox 360 wired/wireless
-            {
-                usageMap[1] = A_BUTTON_USAGE_ID;
-                usageMap[2] = B_BUTTON_USAGE_ID;
-                usageMap[3] = X_BUTTON_USAGE_ID;
-                usageMap[4] = Y_BUTTON_USAGE_ID;
-                usageMap[5] = LEFT_SHOULDER_USAGE_ID;
-                usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
-                usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
-                usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
-                usageMap[9] = START_BUTTON_USAGE_ID;
-                usageMap[10] = BACK_BUTTON_USAGE_ID;
-                usageMap[12] = DPAD_UP_USAGE_ID;
-                usageMap[13] = DPAD_DOWN_USAGE_ID;
-                usageMap[14] = DPAD_LEFT_USAGE_ID;
-                usageMap[15] = DPAD_RIGHT_USAGE_ID;
+            usageMap[1] = X_BUTTON_USAGE_ID; // Square
+            usageMap[2] = A_BUTTON_USAGE_ID; // Cross
+            usageMap[3] = B_BUTTON_USAGE_ID; // Circle
+            usageMap[4] = Y_BUTTON_USAGE_ID; // Triangle
+            usageMap[5] = LEFT_SHOULDER_USAGE_ID; // L1
+            usageMap[6] = RIGHT_SHOULDER_USAGE_ID; // R1
+            usageMap[7] = LEFT_TRIGGER_USAGE_ID; // L2
+            usageMap[8] = RIGHT_TRIGGER_USAGE_ID; // R2
+            usageMap[9] = BACK_BUTTON_USAGE_ID; // Share
+            usageMap[10] = START_BUTTON_USAGE_ID; // Options
+            usageMap[11] = LEFT_THUMBSTICK_USAGE_ID; // L3
+            usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID; // R3
 
-                leftAnalogXMap = kHIDUsage_GD_X;
-                leftAnalogYMap = kHIDUsage_GD_Y;
-                leftTriggerAnalogMap = kHIDUsage_GD_Z;
-                rightAnalogXMap = kHIDUsage_GD_Rx;
-                rightAnalogYMap = kHIDUsage_GD_Ry;
-                rightTriggerAnalogMap = kHIDUsage_GD_Rz;
-            }
-            else if (productId == 0x02d1) // Xbox One controller
-            {
-                usageMap[1] = A_BUTTON_USAGE_ID;
-                usageMap[2] = B_BUTTON_USAGE_ID;
-                usageMap[3] = X_BUTTON_USAGE_ID;
-                usageMap[4] = Y_BUTTON_USAGE_ID;
-                usageMap[5] = LEFT_SHOULDER_USAGE_ID;
-                usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
-                usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
-                usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
-                usageMap[9] = BACK_BUTTON_USAGE_ID; // Menu
-                usageMap[10] = START_BUTTON_USAGE_ID; // View
-                usageMap[12] = DPAD_UP_USAGE_ID;
-                usageMap[13] = DPAD_DOWN_USAGE_ID;
-                usageMap[14] = DPAD_LEFT_USAGE_ID;
-                usageMap[15] = DPAD_RIGHT_USAGE_ID;
+            leftAnalogXMap = kHIDUsage_GD_X;
+            leftAnalogYMap = kHIDUsage_GD_Y;
+            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
+            rightAnalogXMap = kHIDUsage_GD_Z;
+            rightAnalogYMap = kHIDUsage_GD_Rz;
+            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
+        }
+        else if (vendorId == 0x045E && productId == 0x02d1) // Xbox One controller
+        {
+            usageMap[1] = A_BUTTON_USAGE_ID;
+            usageMap[2] = B_BUTTON_USAGE_ID;
+            usageMap[3] = X_BUTTON_USAGE_ID;
+            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[5] = LEFT_SHOULDER_USAGE_ID;
+            usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
+            usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
+            usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
+            usageMap[9] = BACK_BUTTON_USAGE_ID; // Menu
+            usageMap[10] = START_BUTTON_USAGE_ID; // View
+            usageMap[12] = DPAD_UP_USAGE_ID;
+            usageMap[13] = DPAD_DOWN_USAGE_ID;
+            usageMap[14] = DPAD_LEFT_USAGE_ID;
+            usageMap[15] = DPAD_RIGHT_USAGE_ID;
 
-                leftAnalogXMap = kHIDUsage_GD_X;
-                leftAnalogYMap = kHIDUsage_GD_Y;
-                leftTriggerAnalogMap = kHIDUsage_GD_Ry;
-                rightAnalogXMap = kHIDUsage_GD_Z;
-                rightAnalogYMap = kHIDUsage_GD_Rx;
-                rightTriggerAnalogMap = kHIDUsage_GD_Rz;
-            }
+            leftAnalogXMap = kHIDUsage_GD_X;
+            leftAnalogYMap = kHIDUsage_GD_Y;
+            leftTriggerAnalogMap = kHIDUsage_GD_Ry;
+            rightAnalogXMap = kHIDUsage_GD_Z;
+            rightAnalogYMap = kHIDUsage_GD_Rx;
+            rightTriggerAnalogMap = kHIDUsage_GD_Rz;
+        }
+        else if (vendorId == 0x045E && (productId == 0x028E || productId == 0x0719)) // Xbox 360 wired/wireless
+        {
+            usageMap[1] = A_BUTTON_USAGE_ID;
+            usageMap[2] = B_BUTTON_USAGE_ID;
+            usageMap[3] = X_BUTTON_USAGE_ID;
+            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[5] = LEFT_SHOULDER_USAGE_ID;
+            usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
+            usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
+            usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
+            usageMap[9] = START_BUTTON_USAGE_ID;
+            usageMap[10] = BACK_BUTTON_USAGE_ID;
+            usageMap[12] = DPAD_UP_USAGE_ID;
+            usageMap[13] = DPAD_DOWN_USAGE_ID;
+            usageMap[14] = DPAD_LEFT_USAGE_ID;
+            usageMap[15] = DPAD_RIGHT_USAGE_ID;
+
+            leftAnalogXMap = kHIDUsage_GD_X;
+            leftAnalogYMap = kHIDUsage_GD_Y;
+            leftTriggerAnalogMap = kHIDUsage_GD_Z;
+            rightAnalogXMap = kHIDUsage_GD_Rx;
+            rightAnalogYMap = kHIDUsage_GD_Ry;
+            rightTriggerAnalogMap = kHIDUsage_GD_Rz;
         }
         else
         {
