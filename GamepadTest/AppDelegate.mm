@@ -42,7 +42,29 @@ enum UsageID
 	RIGHT_SHOULDER_USAGE_ID,
 };
 
-uint32_t sonyUsageMap[] = {
+uint32_t ps3UsageMap[] = {
+    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
+    kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
+    kHIDUsage_GD_Z, // RIGHT_THUMB_X_USAGE_ID
+    kHIDUsage_GD_Rz, // RIGHT_THUMB_Y_USAGE_ID
+    kHIDUsage_GD_Rx, // LEFT_TRIGGER_USAGE_ID
+    kHIDUsage_GD_Ry, // RIGHT_TRIGGER_USAGE_ID
+
+    0x00, //DPAD_LEFT_USAGE_ID
+    0x00, //DPAD_RIGHT_USAGE_ID
+    0x00, //DPAD_DOWN_USAGE_ID
+    0x00, //DPAD_UP_USAGE_ID
+
+    0x0A, // PAUSE_BUTTON_USAGE_ID
+    0x02, // A_BUTTON_USAGE_ID
+    0x03, // B_BUTTON_USAGE_ID
+    0x01, // X_BUTTON_USAGE_ID
+    0x04, // Y_BUTTON_USAGE_ID
+    0x05, // LEFT_SHOULDER_USAGE_ID
+    0x06 // RIGHT_SHOULDER_USAGE_ID
+};
+
+uint32_t ps4UsageMap[] = {
     kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
 	kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
 	kHIDUsage_GD_Z, // RIGHT_THUMB_X_USAGE_ID
@@ -64,7 +86,29 @@ uint32_t sonyUsageMap[] = {
 	0x06 // RIGHT_SHOULDER_USAGE_ID
 };
 
-uint32_t msUsageMap[] = {
+uint32_t xb360UsageMap[] = {
+    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
+    kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
+    kHIDUsage_GD_Rx, // RIGHT_THUMB_X_USAGE_ID
+    kHIDUsage_GD_Ry, // RIGHT_THUMB_Y_USAGE_ID
+    kHIDUsage_GD_Z, // LEFT_TRIGGER_USAGE_ID
+    kHIDUsage_GD_Rz, // RIGHT_TRIGGER_USAGE_ID
+
+    0x0E, //DPAD_LEFT_USAGE_ID
+    0x0F, //DPAD_RIGHT_USAGE_ID
+    0x0D, //DPAD_DOWN_USAGE_ID
+    0x0C, //DPAD_UP_USAGE_ID
+
+    0x09, // PAUSE_BUTTON_USAGE_ID
+    0x01, // A_BUTTON_USAGE_ID
+    0x02, // B_BUTTON_USAGE_ID
+    0x03, // X_BUTTON_USAGE_ID
+    0x04, // Y_BUTTON_USAGE_ID
+    0x05, // LEFT_SHOULDER_USAGE_ID
+    0x06 // RIGHT_SHOULDER_USAGE_ID
+};
+
+uint32_t xbOneUsageMap[] = {
     kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
     kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
     kHIDUsage_GD_Rx, // RIGHT_THUMB_X_USAGE_ID
@@ -184,20 +228,25 @@ public:
 
         if (vendorId == 0x054C) // Sony
         {
-            if (productId == 0x05C4) // DualShock 4
+            if (productId == 0x0268) // Playstation 3 controller
             {
-                usageMap = sonyUsageMap;
+                usageMap = ps3UsageMap;
+            }
+            else if (productId == 0x05C4) // Playstation 4 controller
+            {
+                usageMap = ps4UsageMap;
             }
         }
         else if (vendorId == 0x045E) // Microsoft
         {
             if (productId == 0x028E || productId == 0x028F) // 360 wired/wireless
             {
-                usageMap = msUsageMap;
+                usageMap = xb360UsageMap;
             }
-        }
-        else if (vendorId == 0x057E) // Nintendo
-        {
+            else if (productId == 0x02d1) // XBox One wired/wireless
+            {
+                usageMap = xbOneUsageMap;
+            }
         }
         else
         {
