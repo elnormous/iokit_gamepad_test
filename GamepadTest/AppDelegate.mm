@@ -21,114 +21,56 @@ static void deviceInput(void* ctx, IOReturn inResult, void* inSender, IOHIDValue
 
 enum UsageID
 {
-    LEFT_THUMB_X_USAGE_ID,
-    LEFT_THUMB_Y_USAGE_ID,
-	RIGHT_THUMB_X_USAGE_ID,
-	RIGHT_THUMB_Y_USAGE_ID,
-	LEFT_TRIGGER_USAGE_ID,
-	RIGHT_TRIGGER_USAGE_ID,
+    NONE,
 
     DPAD_LEFT_USAGE_ID,
 	DPAD_RIGHT_USAGE_ID,
 	DPAD_DOWN_USAGE_ID,
 	DPAD_UP_USAGE_ID,
 
+    START_BUTTON_USAGE_ID,
+    BACK_BUTTON_USAGE_ID,
 	PAUSE_BUTTON_USAGE_ID,
+
 	A_BUTTON_USAGE_ID,
 	B_BUTTON_USAGE_ID,
 	X_BUTTON_USAGE_ID,
 	Y_BUTTON_USAGE_ID,
 	LEFT_SHOULDER_USAGE_ID,
 	RIGHT_SHOULDER_USAGE_ID,
+    LEFT_TRIGGER_USAGE_ID,
+    RIGHT_TRIGGER_USAGE_ID,
+    LEFT_THUMBSTICK_USAGE_ID,
+    RIGHT_THUMBSTICK_USAGE_ID,
 };
 
-uint32_t ps3UsageMap[] = {
-    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Z, // RIGHT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Rz, // RIGHT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Rx, // LEFT_TRIGGER_USAGE_ID
-    kHIDUsage_GD_Ry, // RIGHT_TRIGGER_USAGE_ID
+static std::string usageToString(UsageID usageId)
+{
+    switch (usageId)
+    {
+        case DPAD_LEFT_USAGE_ID: return "D-pad left";
+        case DPAD_RIGHT_USAGE_ID: return "D-pad right";
+        case DPAD_DOWN_USAGE_ID: return "D-pad down";
+        case DPAD_UP_USAGE_ID: return "D-pad up";
 
-    0x00, //DPAD_LEFT_USAGE_ID
-    0x00, //DPAD_RIGHT_USAGE_ID
-    0x00, //DPAD_DOWN_USAGE_ID
-    0x00, //DPAD_UP_USAGE_ID
+        case START_BUTTON_USAGE_ID: return "Start";
+        case BACK_BUTTON_USAGE_ID: return "Back";
+        case PAUSE_BUTTON_USAGE_ID: return "Pause";
 
-    0x0A, // PAUSE_BUTTON_USAGE_ID
-    0x02, // A_BUTTON_USAGE_ID
-    0x03, // B_BUTTON_USAGE_ID
-    0x01, // X_BUTTON_USAGE_ID
-    0x04, // Y_BUTTON_USAGE_ID
-    0x05, // LEFT_SHOULDER_USAGE_ID
-    0x06 // RIGHT_SHOULDER_USAGE_ID
-};
-
-uint32_t ps4UsageMap[] = {
-    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
-	kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
-	kHIDUsage_GD_Z, // RIGHT_THUMB_X_USAGE_ID
-	kHIDUsage_GD_Rz, // RIGHT_THUMB_Y_USAGE_ID
-	kHIDUsage_GD_Rx, // LEFT_TRIGGER_USAGE_ID
-	kHIDUsage_GD_Ry, // RIGHT_TRIGGER_USAGE_ID
-
-    0x00, //DPAD_LEFT_USAGE_ID
-    0x00, //DPAD_RIGHT_USAGE_ID
-    0x00, //DPAD_DOWN_USAGE_ID
-    0x00, //DPAD_UP_USAGE_ID
-
-    0x0A, // PAUSE_BUTTON_USAGE_ID
-	0x02, // A_BUTTON_USAGE_ID
-	0x03, // B_BUTTON_USAGE_ID
-	0x01, // X_BUTTON_USAGE_ID
-	0x04, // Y_BUTTON_USAGE_ID
-	0x05, // LEFT_SHOULDER_USAGE_ID
-	0x06 // RIGHT_SHOULDER_USAGE_ID
-};
-
-uint32_t xb360UsageMap[] = {
-    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Rx, // RIGHT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Ry, // RIGHT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Z, // LEFT_TRIGGER_USAGE_ID
-    kHIDUsage_GD_Rz, // RIGHT_TRIGGER_USAGE_ID
-
-    0x0E, //DPAD_LEFT_USAGE_ID
-    0x0F, //DPAD_RIGHT_USAGE_ID
-    0x0D, //DPAD_DOWN_USAGE_ID
-    0x0C, //DPAD_UP_USAGE_ID
-
-    0x09, // PAUSE_BUTTON_USAGE_ID
-    0x01, // A_BUTTON_USAGE_ID
-    0x02, // B_BUTTON_USAGE_ID
-    0x03, // X_BUTTON_USAGE_ID
-    0x04, // Y_BUTTON_USAGE_ID
-    0x05, // LEFT_SHOULDER_USAGE_ID
-    0x06 // RIGHT_SHOULDER_USAGE_ID
-};
-
-uint32_t xbOneUsageMap[] = {
-    kHIDUsage_GD_X, // LEFT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Y, // LEFT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Rx, // RIGHT_THUMB_X_USAGE_ID
-    kHIDUsage_GD_Ry, // RIGHT_THUMB_Y_USAGE_ID
-    kHIDUsage_GD_Z, // LEFT_TRIGGER_USAGE_ID
-    kHIDUsage_GD_Rz, // RIGHT_TRIGGER_USAGE_ID
-
-    0x0E, //DPAD_LEFT_USAGE_ID
-    0x0F, //DPAD_RIGHT_USAGE_ID
-    0x0D, //DPAD_DOWN_USAGE_ID
-    0x0C, //DPAD_UP_USAGE_ID
-
-    0x09, // PAUSE_BUTTON_USAGE_ID
-    0x01, // A_BUTTON_USAGE_ID
-    0x02, // B_BUTTON_USAGE_ID
-    0x03, // X_BUTTON_USAGE_ID
-    0x04, // Y_BUTTON_USAGE_ID
-    0x05, // LEFT_SHOULDER_USAGE_ID
-    0x06 // RIGHT_SHOULDER_USAGE_ID
-};
+        case A_BUTTON_USAGE_ID: return "A";
+        case B_BUTTON_USAGE_ID: return "B";
+        case X_BUTTON_USAGE_ID: return "X";
+        case Y_BUTTON_USAGE_ID: return "Y";
+        case LEFT_SHOULDER_USAGE_ID: return "Left shoulder";
+        case RIGHT_SHOULDER_USAGE_ID: return "Right shoulder";
+        case LEFT_TRIGGER_USAGE_ID: return "Left trigger";
+        case RIGHT_TRIGGER_USAGE_ID: return "Right trigger";
+        case LEFT_THUMBSTICK_USAGE_ID: return "Left thumbstick";
+        case RIGHT_THUMBSTICK_USAGE_ID: return "Right thumbstick";
+        default:
+            return "Unknown";
+    }
+}
 
 class GamepadElement
 {
@@ -226,26 +168,108 @@ public:
             productId = [product integerValue];
         }
 
+        std::fill(std::begin(usageMap), std::end(usageMap), NONE);
+
         if (vendorId == 0x054C) // Sony
         {
             if (productId == 0x0268) // Playstation 3 controller
             {
-                usageMap = ps3UsageMap;
+                usageMap[1] = BACK_BUTTON_USAGE_ID; // Select
+                usageMap[2] = LEFT_THUMBSTICK_USAGE_ID; // L3
+                usageMap[3] = RIGHT_THUMBSTICK_USAGE_ID; // R3
+                usageMap[4] = START_BUTTON_USAGE_ID; // Start
+                usageMap[5] = DPAD_UP_USAGE_ID;
+                usageMap[6] = DPAD_RIGHT_USAGE_ID;
+                usageMap[7] = DPAD_DOWN_USAGE_ID;
+                usageMap[8] = DPAD_LEFT_USAGE_ID;
+                usageMap[9] = LEFT_TRIGGER_USAGE_ID; // L2
+                usageMap[10] = RIGHT_TRIGGER_USAGE_ID; // R2
+                usageMap[11] = LEFT_SHOULDER_USAGE_ID; // L1
+                usageMap[12] = RIGHT_SHOULDER_USAGE_ID; // R1
+                usageMap[13] = Y_BUTTON_USAGE_ID; // Triangle
+                usageMap[14] = B_BUTTON_USAGE_ID; // Circle
+                usageMap[15] = A_BUTTON_USAGE_ID; // Cross
+                usageMap[16] = X_BUTTON_USAGE_ID; // Square
+
+                leftAnalogXMap = kHIDUsage_GD_X;
+                leftAnalogYMap = kHIDUsage_GD_Y;
+                leftTriggerAnalogMap = kHIDUsage_GD_Rx;
+                rightAnalogXMap = kHIDUsage_GD_Z;
+                rightAnalogYMap = kHIDUsage_GD_Rz;
+                rightTriggerAnalogMap = kHIDUsage_GD_Ry;
             }
             else if (productId == 0x05C4) // Playstation 4 controller
             {
-                usageMap = ps4UsageMap;
+                usageMap[1] = X_BUTTON_USAGE_ID; // Square
+                usageMap[2] = A_BUTTON_USAGE_ID; // Cross
+                usageMap[3] = B_BUTTON_USAGE_ID; // Circle
+                usageMap[4] = Y_BUTTON_USAGE_ID; // Triangle
+                usageMap[5] = LEFT_SHOULDER_USAGE_ID; // L1
+                usageMap[6] = RIGHT_SHOULDER_USAGE_ID; // R1
+                usageMap[7] = LEFT_TRIGGER_USAGE_ID; // L2
+                usageMap[8] = RIGHT_TRIGGER_USAGE_ID; // R2
+                usageMap[9] = BACK_BUTTON_USAGE_ID; // Share
+                usageMap[10] = START_BUTTON_USAGE_ID; // Options
+                usageMap[11] = LEFT_THUMBSTICK_USAGE_ID; // L3
+                usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID; // R3
+
+                leftAnalogXMap = kHIDUsage_GD_X;
+                leftAnalogYMap = kHIDUsage_GD_Y;
+                leftTriggerAnalogMap = kHIDUsage_GD_Rx;
+                rightAnalogXMap = kHIDUsage_GD_Z;
+                rightAnalogYMap = kHIDUsage_GD_Rz;
+                rightTriggerAnalogMap = kHIDUsage_GD_Ry;
             }
         }
         else if (vendorId == 0x045E) // Microsoft
         {
-            if (productId == 0x028E || productId == 0x028F) // 360 wired/wireless
+            if (productId == 0x028E || productId == 0x0719) // Xbox 360 wired/wireless
             {
-                usageMap = xb360UsageMap;
+                usageMap[1] = A_BUTTON_USAGE_ID;
+                usageMap[2] = B_BUTTON_USAGE_ID;
+                usageMap[3] = X_BUTTON_USAGE_ID;
+                usageMap[4] = Y_BUTTON_USAGE_ID;
+                usageMap[5] = LEFT_SHOULDER_USAGE_ID;
+                usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
+                usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
+                usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
+                usageMap[9] = START_BUTTON_USAGE_ID;
+                usageMap[10] = BACK_BUTTON_USAGE_ID;
+                usageMap[12] = DPAD_UP_USAGE_ID;
+                usageMap[13] = DPAD_DOWN_USAGE_ID;
+                usageMap[14] = DPAD_LEFT_USAGE_ID;
+                usageMap[15] = DPAD_RIGHT_USAGE_ID;
+
+                leftAnalogXMap = kHIDUsage_GD_X;
+                leftAnalogYMap = kHIDUsage_GD_Y;
+                leftTriggerAnalogMap = kHIDUsage_GD_Z;
+                rightAnalogXMap = kHIDUsage_GD_Rx;
+                rightAnalogYMap = kHIDUsage_GD_Ry;
+                rightTriggerAnalogMap = kHIDUsage_GD_Rz;
             }
-            else if (productId == 0x02d1) // XBox One wired/wireless
+            else if (productId == 0x02d1) // Xbox One controller
             {
-                usageMap = xbOneUsageMap;
+                usageMap[1] = A_BUTTON_USAGE_ID;
+                usageMap[2] = B_BUTTON_USAGE_ID;
+                usageMap[3] = X_BUTTON_USAGE_ID;
+                usageMap[4] = Y_BUTTON_USAGE_ID;
+                usageMap[5] = LEFT_SHOULDER_USAGE_ID;
+                usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
+                usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
+                usageMap[8] = RIGHT_THUMBSTICK_USAGE_ID;
+                usageMap[9] = BACK_BUTTON_USAGE_ID; // Menu
+                usageMap[10] = START_BUTTON_USAGE_ID; // View
+                usageMap[12] = DPAD_UP_USAGE_ID;
+                usageMap[13] = DPAD_DOWN_USAGE_ID;
+                usageMap[14] = DPAD_LEFT_USAGE_ID;
+                usageMap[15] = DPAD_RIGHT_USAGE_ID;
+
+                leftAnalogXMap = kHIDUsage_GD_X;
+                leftAnalogYMap = kHIDUsage_GD_Y;
+                leftTriggerAnalogMap = kHIDUsage_GD_Ry;
+                rightAnalogXMap = kHIDUsage_GD_Z;
+                rightAnalogYMap = kHIDUsage_GD_Rx;
+                rightTriggerAnalogMap = kHIDUsage_GD_Rz;
             }
         }
         else
@@ -305,7 +329,7 @@ public:
         return nullptr;
     }
 
-    uint32_t* getUsageMap() const { return usageMap; }
+    const UsageID* getUsageMap() const { return usageMap; }
 
 protected:
     IOHIDDeviceRef device = Nil;
@@ -315,7 +339,13 @@ protected:
     uint64_t uniqueDeviceId = 0;
     uint64_t vendorId = 0;
     uint64_t productId = 0;
-    uint32_t* usageMap = nullptr;
+    UsageID usageMap[24];
+    uint32_t leftAnalogXMap = 0;
+    uint32_t leftAnalogYMap = 0;
+    uint32_t leftTriggerAnalogMap = 0;
+    uint32_t rightAnalogXMap = 0;
+    uint32_t rightAnalogYMap = 0;
+    uint32_t rightTriggerAnalogMap = 0;
 };
 
 std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
@@ -337,15 +367,7 @@ static void deviceInput(void* ctx, IOReturn inResult, void* inSender, IOHIDValue
 
             if (gamepadElement->getType() == GamepadElement::Type::BUTTON)
             {
-                if (gamepad->getUsageMap())
-                {
-                    if (gamepadElement->getUsage() == gamepad->getUsageMap()[A_BUTTON_USAGE_ID]) std::cout << "Button A" << std::endl;
-                    else if (gamepadElement->getUsage() == gamepad->getUsageMap()[B_BUTTON_USAGE_ID]) std::cout << "Button B" << std::endl;
-                    else if (gamepadElement->getUsage() == gamepad->getUsageMap()[X_BUTTON_USAGE_ID]) std::cout << "Button X" << std::endl;
-                    else if (gamepadElement->getUsage() == gamepad->getUsageMap()[Y_BUTTON_USAGE_ID]) std::cout << "Button Y" << std::endl;
-                }
-
-                std::cout << "Button input: " << integerValue << std::endl;
+                std::cout << usageToString(gamepad->getUsageMap()[gamepadElement->getUsage()]) << " button input: " << integerValue << std::endl;
             }
             else if (gamepadElement->getType() == GamepadElement::Type::HAT)
             {
