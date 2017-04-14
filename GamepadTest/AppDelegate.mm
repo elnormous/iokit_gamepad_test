@@ -315,7 +315,6 @@ public:
                  (vendorId == 0x15E4 && productId == 0x3F0A) || // XboxAirflowiredcontroller
                  (vendorId == 0x0E6F && productId == 0x0401)) // GameStop XBox 360 Controller
         {
-            // TODO: check all the Xbox 360 like controllers
             usageMap[1] = A_BUTTON_USAGE_ID;
             usageMap[2] = B_BUTTON_USAGE_ID;
             usageMap[3] = X_BUTTON_USAGE_ID;
