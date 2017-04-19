@@ -365,9 +365,7 @@ public:
         for (CFIndex i = 0; i < CFArrayGetCount(elementArray); i++)
         {
             IOHIDElementRef element = (IOHIDElementRef)CFArrayGetValueAtIndex(elementArray, i);
-            IOHIDElementCookie cookie = IOHIDElementGetCookie(element);
-
-            elements.insert(std::make_pair(cookie, GamepadElement(element)));
+            elements.insert(std::make_pair(element, GamepadElement(element)));
         }
         
         CFRelease(elementArray);
@@ -395,14 +393,14 @@ public:
         return productId;
     }
 
-    const std::map<IOHIDElementCookie, GamepadElement>& getElements()
+    const std::map<IOHIDElementRef, GamepadElement>& getElements()
     {
         return elements;
     }
 
-    const GamepadElement* getElementByCookie(IOHIDElementCookie cookie) const
+    const GamepadElement* getElement(IOHIDElementRef element) const
     {
-        auto i = elements.find(cookie);
+        auto i = elements.find(element);
 
         if (i != elements.end())
         {
@@ -416,7 +414,7 @@ public:
 
 protected:
     IOHIDDeviceRef device = Nil;
-    std::map<IOHIDElementCookie, GamepadElement> elements;
+    std::map<IOHIDElementRef, GamepadElement> elements;
     std::string name;
     uint64_t uniqueId = 0;
     uint64_t uniqueDeviceId = 0;
@@ -440,9 +438,8 @@ static void deviceInput(void* ctx, IOReturn inResult, void* inSender, IOHIDValue
     if (gamepad)
     {
         IOHIDElementRef element = IOHIDValueGetElement(value);
-        IOHIDElementCookie cookie = IOHIDElementGetCookie(element);
 
-        const GamepadElement* gamepadElement = gamepad->getElementByCookie(cookie);
+        const GamepadElement* gamepadElement = gamepad->getElement(element);
 
         if (gamepadElement)
         {
