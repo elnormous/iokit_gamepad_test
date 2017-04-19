@@ -68,54 +68,24 @@ static std::string usageToString(UsageID usageId)
         case RIGHT_TRIGGER_USAGE_ID: return "Right trigger";
         case LEFT_THUMBSTICK_USAGE_ID: return "Left thumbstick";
         case RIGHT_THUMBSTICK_USAGE_ID: return "Right thumbstick";
-        default:
-            return "unknown";
+        default: return "Unknown";
     }
 }
 
 class GamepadElement
 {
 public:
-    enum class Type
-    {
-        NONE,
-        BUTTON,
-        HAT,
-        ANALOG
-    };
-
     GamepadElement(IOHIDElementRef aElement):
         element(aElement)
     {
-        IOHIDElementType elementType = IOHIDElementGetType(element);
+        elementType = IOHIDElementGetType(element);
         usage = IOHIDElementGetUsage(element);
-        uint32_t usagePage = IOHIDElementGetUsagePage(element);
+        usagePage = IOHIDElementGetUsagePage(element);
 
         min = IOHIDElementGetPhysicalMin(element);
         max = IOHIDElementGetPhysicalMax(element);
-
-        if (elementType == kIOHIDElementTypeInput_Misc ||
-            elementType == kIOHIDElementTypeInput_Axis ||
-            elementType == kIOHIDElementTypeInput_Button)
-        {
-            if (max - min == 1 ||
-                usagePage == kHIDPage_Button ||
-                elementType == kIOHIDElementTypeInput_Button)
-            {
-                type = Type::BUTTON;
-            }
-            else if (usage == kHIDUsage_GD_Hatswitch)
-            {
-                type = Type::HAT;
-            }
-            else if (usage >= kHIDUsage_GD_X && usage <= kHIDUsage_GD_Rz)
-            {
-                type = Type::ANALOG;
-            }
-        }
     }
 
-    Type getType() const { return type; }
     CFIndex getMin() const { return min; }
     CFIndex getMax() const { return max; }
     uint32_t getUsage() const { return usage; }
@@ -127,9 +97,10 @@ public:
 
 protected:
     IOHIDElementRef element = Nil;
-    Type type = Type::NONE;
     CFIndex min = 0;
     CFIndex max = 0;
+    IOHIDElementType elementType;
+    uint32_t usagePage;
     uint32_t usage;
 };
 
@@ -139,6 +110,8 @@ public:
     Gamepad(IOHIDDeviceRef aDevice):
         device(aDevice)
     {
+        std::fill(std::begin(usageMap), std::end(usageMap), UsageID::NONE);
+
         NSString* productKey = (NSString*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductKey));
         if (productKey)
         {
@@ -421,11 +394,11 @@ public:
         {
             CFIndex integerValue = IOHIDValueGetIntegerValue(value);
 
-            if (gamepadElement->getType() == GamepadElement::Type::BUTTON)
+            if (gamepadElement->getUsage() < 24 && usageMap[gamepadElement->getUsage()] != UsageID::NONE)
             {
-                std::cout << usageToString(usageMap[gamepadElement->getUsage()]) << " value: " << integerValue << std::endl;
+                std::cout << usageToString(usageMap[gamepadElement->getUsage()]) << " value: " << integerValue << ", min: " << gamepadElement->getMin() << ", max: " << gamepadElement->getMax() << std::endl;
             }
-            else if (gamepadElement->getType() == GamepadElement::Type::HAT)
+            else if (gamepadElement->getUsage() == kHIDUsage_GD_Hatswitch)
             {
                 std::cout << "D-pad value: ";
 
@@ -444,15 +417,13 @@ public:
 
                 std::cout << std::endl;
             }
-            else if (gamepadElement->getType() == GamepadElement::Type::ANALOG)
-            {
-                if (gamepadElement->getUsage() == leftThumbXMap) std::cout << "Left thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-                if (gamepadElement->getUsage() == leftThumbYMap) std::cout << "Left thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-                if (gamepadElement->getUsage() == leftTriggerMap) std::cout << "Left trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-                if (gamepadElement->getUsage() == rightThumbXMap) std::cout << "Right thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-                if (gamepadElement->getUsage() == rightThumbYMap) std::cout << "Right thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-                if (gamepadElement->getUsage() == rightTriggerMap) std::cout << "Right trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-            }
+
+            if (gamepadElement->getUsage() == leftThumbXMap) std::cout << "Left thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            if (gamepadElement->getUsage() == leftThumbYMap) std::cout << "Left thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            if (gamepadElement->getUsage() == leftTriggerMap) std::cout << "Left trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            if (gamepadElement->getUsage() == rightThumbXMap) std::cout << "Right thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            if (gamepadElement->getUsage() == rightThumbYMap) std::cout << "Right thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            if (gamepadElement->getUsage() == rightTriggerMap) std::cout << "Right trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
         }
     }
 
