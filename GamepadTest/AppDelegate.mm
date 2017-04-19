@@ -32,10 +32,11 @@ enum UsageID
     BACK_BUTTON_USAGE_ID,
 	PAUSE_BUTTON_USAGE_ID,
 
-	A_BUTTON_USAGE_ID,
-	B_BUTTON_USAGE_ID,
-	X_BUTTON_USAGE_ID,
-	Y_BUTTON_USAGE_ID,
+	FACE1_BUTTON_USAGE_ID,
+	FACE2_BUTTON_USAGE_ID,
+	FACE3_BUTTON_USAGE_ID,
+	FACE4_BUTTON_USAGE_ID,
+
 	LEFT_SHOULDER_USAGE_ID,
 	RIGHT_SHOULDER_USAGE_ID,
     LEFT_TRIGGER_USAGE_ID,
@@ -57,10 +58,10 @@ static std::string usageToString(UsageID usageId)
         case BACK_BUTTON_USAGE_ID: return "Back";
         case PAUSE_BUTTON_USAGE_ID: return "Pause";
 
-        case A_BUTTON_USAGE_ID: return "A";
-        case B_BUTTON_USAGE_ID: return "B";
-        case X_BUTTON_USAGE_ID: return "X";
-        case Y_BUTTON_USAGE_ID: return "Y";
+        case FACE1_BUTTON_USAGE_ID: return "Face 1";
+        case FACE2_BUTTON_USAGE_ID: return "Face 2";
+        case FACE3_BUTTON_USAGE_ID: return "Face 3";
+        case FACE4_BUTTON_USAGE_ID: return "Face 4";
         case LEFT_SHOULDER_USAGE_ID: return "Left shoulder";
         case RIGHT_SHOULDER_USAGE_ID: return "Right shoulder";
         case LEFT_TRIGGER_USAGE_ID: return "Left trigger";
@@ -68,7 +69,7 @@ static std::string usageToString(UsageID usageId)
         case LEFT_THUMBSTICK_USAGE_ID: return "Left thumbstick";
         case RIGHT_THUMBSTICK_USAGE_ID: return "Right thumbstick";
         default:
-            return "Unknown";
+            return "unknown";
     }
 }
 
@@ -184,10 +185,10 @@ public:
             usageMap[10] = RIGHT_TRIGGER_USAGE_ID; // R2
             usageMap[11] = LEFT_SHOULDER_USAGE_ID; // L1
             usageMap[12] = RIGHT_SHOULDER_USAGE_ID; // R1
-            usageMap[13] = Y_BUTTON_USAGE_ID; // Triangle
-            usageMap[14] = B_BUTTON_USAGE_ID; // Circle
-            usageMap[15] = A_BUTTON_USAGE_ID; // Cross
-            usageMap[16] = X_BUTTON_USAGE_ID; // Square
+            usageMap[13] = FACE4_BUTTON_USAGE_ID; // Triangle
+            usageMap[14] = FACE2_BUTTON_USAGE_ID; // Circle
+            usageMap[15] = FACE1_BUTTON_USAGE_ID; // Cross
+            usageMap[16] = FACE3_BUTTON_USAGE_ID; // Square
 
             leftAnalogXMap = kHIDUsage_GD_X;
             leftAnalogYMap = kHIDUsage_GD_Y;
@@ -198,10 +199,10 @@ public:
         }
         else if (vendorId == 0x054C && productId == 0x05C4) // Playstation 4 controller
         {
-            usageMap[1] = X_BUTTON_USAGE_ID; // Square
-            usageMap[2] = A_BUTTON_USAGE_ID; // Cross
-            usageMap[3] = B_BUTTON_USAGE_ID; // Circle
-            usageMap[4] = Y_BUTTON_USAGE_ID; // Triangle
+            usageMap[1] = FACE3_BUTTON_USAGE_ID; // Square
+            usageMap[2] = FACE1_BUTTON_USAGE_ID; // Cross
+            usageMap[3] = FACE2_BUTTON_USAGE_ID; // Circle
+            usageMap[4] = FACE4_BUTTON_USAGE_ID; // Triangle
             usageMap[5] = LEFT_SHOULDER_USAGE_ID; // L1
             usageMap[6] = RIGHT_SHOULDER_USAGE_ID; // R1
             usageMap[7] = LEFT_TRIGGER_USAGE_ID; // L2
@@ -220,10 +221,10 @@ public:
         }
         else if (vendorId == 0x045E && productId == 0x02d1) // Xbox One controller
         {
-            usageMap[1] = A_BUTTON_USAGE_ID;
-            usageMap[2] = B_BUTTON_USAGE_ID;
-            usageMap[3] = X_BUTTON_USAGE_ID;
-            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[1] = FACE1_BUTTON_USAGE_ID; // A
+            usageMap[2] = FACE2_BUTTON_USAGE_ID; // B
+            usageMap[3] = FACE3_BUTTON_USAGE_ID; // X
+            usageMap[4] = FACE4_BUTTON_USAGE_ID; // Y
             usageMap[5] = LEFT_SHOULDER_USAGE_ID;
             usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
             usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
@@ -315,10 +316,10 @@ public:
                  (vendorId == 0x15E4 && productId == 0x3F0A) || // XboxAirflowiredcontroller
                  (vendorId == 0x0E6F && productId == 0x0401)) // GameStop XBox 360 Controller
         {
-            usageMap[1] = A_BUTTON_USAGE_ID;
-            usageMap[2] = B_BUTTON_USAGE_ID;
-            usageMap[3] = X_BUTTON_USAGE_ID;
-            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[1] = FACE1_BUTTON_USAGE_ID; // A
+            usageMap[2] = FACE2_BUTTON_USAGE_ID; // B
+            usageMap[3] = FACE3_BUTTON_USAGE_ID; // X
+            usageMap[4] = FACE4_BUTTON_USAGE_ID; // Y
             usageMap[5] = LEFT_SHOULDER_USAGE_ID;
             usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
             usageMap[7] = LEFT_THUMBSTICK_USAGE_ID;
@@ -339,10 +340,10 @@ public:
         }
         else // Generic (based on Logitech Rum/blePad 2)
         {
-            usageMap[1] = X_BUTTON_USAGE_ID;
-            usageMap[2] = A_BUTTON_USAGE_ID;
-            usageMap[3] = B_BUTTON_USAGE_ID;
-            usageMap[4] = Y_BUTTON_USAGE_ID;
+            usageMap[1] = FACE3_BUTTON_USAGE_ID; // X
+            usageMap[2] = FACE1_BUTTON_USAGE_ID; // A
+            usageMap[3] = FACE2_BUTTON_USAGE_ID; // B
+            usageMap[4] = FACE4_BUTTON_USAGE_ID; // Y
             usageMap[5] = LEFT_SHOULDER_USAGE_ID;
             usageMap[6] = RIGHT_SHOULDER_USAGE_ID;
             usageMap[7] = LEFT_TRIGGER_USAGE_ID;
@@ -410,7 +411,45 @@ public:
         return nullptr;
     }
 
-    const UsageID* getUsageMap() const { return usageMap; }
+    void handleInput(IOHIDValueRef value)
+    {
+        IOHIDElementRef element = IOHIDValueGetElement(value);
+
+        const GamepadElement* gamepadElement = getElement(element);
+
+        if (gamepadElement)
+        {
+            CFIndex integerValue = IOHIDValueGetIntegerValue(value);
+
+            if (gamepadElement->getType() == GamepadElement::Type::BUTTON)
+            {
+                std::cout << usageToString(usageMap[gamepadElement->getUsage()]) << " value: " << integerValue << std::endl;
+            }
+            else if (gamepadElement->getType() == GamepadElement::Type::HAT)
+            {
+                std::cout << "D-pad value: ";
+
+                switch (integerValue)
+                {
+                    case 0: std::cout << "up"; break;
+                    case 1: std::cout << "up, right"; break;
+                    case 2: std::cout << "right"; break;
+                    case 3: std::cout << "down, right"; break;
+                    case 4: std::cout << "down"; break;
+                    case 5: std::cout << "down, left"; break;
+                    case 6: std::cout << "left"; break;
+                    case 7: std::cout << "up, left"; break;
+                    case 8: std::cout << "none"; break;
+                }
+
+                std::cout << std::endl;
+            }
+            else if (gamepadElement->getType() == GamepadElement::Type::ANALOG)
+            {
+                //std::cout << "Analog value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+            }
+        }
+    }
 
 protected:
     IOHIDDeviceRef device = Nil;
@@ -434,31 +473,7 @@ std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
 static void deviceInput(void* ctx, IOReturn inResult, void* inSender, IOHIDValueRef value)
 {
     Gamepad* gamepad = reinterpret_cast<Gamepad*>(ctx);
-
-    if (gamepad)
-    {
-        IOHIDElementRef element = IOHIDValueGetElement(value);
-
-        const GamepadElement* gamepadElement = gamepad->getElement(element);
-
-        if (gamepadElement)
-        {
-            CFIndex integerValue = IOHIDValueGetIntegerValue(value);
-
-            if (gamepadElement->getType() == GamepadElement::Type::BUTTON)
-            {
-                std::cout << usageToString(gamepad->getUsageMap()[gamepadElement->getUsage()]) << " button input: " << integerValue << std::endl;
-            }
-            else if (gamepadElement->getType() == GamepadElement::Type::HAT)
-            {
-                std::cout << "Axis value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-            }
-            else if (gamepadElement->getType() == GamepadElement::Type::ANALOG)
-            {
-                //std::cout << "Analog value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
-            }
-        }
-    }
+    gamepad->handleInput(value);
 }
 
 static void deviceAdded(void* ctx, IOReturn inResult, void* inSender, IOHIDDeviceRef device)
@@ -513,7 +528,11 @@ static void deviceRemoved(void *ctx, IOReturn inResult, void *inSender, IOHIDDev
 
 -(void)applicationWillTerminate:(NSNotification *)aNotification
 {
-    // Insert code here to tear down your application
+    if (hidManager)
+    {
+        IOHIDManagerClose(hidManager, kIOHIDOptionsTypeNone);
+        CFRelease(hidManager);
+    }
 }
 
 
