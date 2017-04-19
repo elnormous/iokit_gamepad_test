@@ -110,6 +110,12 @@ public:
     Gamepad(IOHIDDeviceRef aDevice):
         device(aDevice)
     {
+        if (IOHIDDeviceOpen(device, kIOHIDOptionsTypeNone) != kIOReturnSuccess)
+        {
+            std::cout << "Failed to open device" << std::endl;
+            return;
+        }
+
         std::fill(std::begin(usageMap), std::end(usageMap), UsageID::NONE);
 
         NSString* productKey = (NSString*)IOHIDDeviceGetProperty(device, CFSTR(kIOHIDProductKey));
@@ -345,6 +351,15 @@ public:
         CFRelease(elementArray);
 
         IOHIDDeviceRegisterInputValueCallback(device, deviceInput, this);
+    }
+
+    ~Gamepad()
+    {
+        if (IOHIDDeviceClose(device, kIOHIDOptionsTypeNone) != kIOReturnSuccess)
+        {
+            std::cout << "Failed to close device" << std::endl;
+            return;
+        }
     }
 
     const std::string& getName() const
