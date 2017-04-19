@@ -190,12 +190,12 @@ public:
             usageMap[15] = FACE1_BUTTON_USAGE_ID; // Cross
             usageMap[16] = FACE3_BUTTON_USAGE_ID; // Square
 
-            leftAnalogXMap = kHIDUsage_GD_X;
-            leftAnalogYMap = kHIDUsage_GD_Y;
-            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
-            rightAnalogXMap = kHIDUsage_GD_Z;
-            rightAnalogYMap = kHIDUsage_GD_Rz;
-            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
+            leftThumbXMap = kHIDUsage_GD_X;
+            leftThumbYMap = kHIDUsage_GD_Y;
+            leftTriggerMap = kHIDUsage_GD_Rx;
+            rightThumbXMap = kHIDUsage_GD_Z;
+            rightThumbYMap = kHIDUsage_GD_Rz;
+            rightTriggerMap = kHIDUsage_GD_Ry;
         }
         else if (vendorId == 0x054C && productId == 0x05C4) // Playstation 4 controller
         {
@@ -212,12 +212,12 @@ public:
             usageMap[11] = LEFT_THUMBSTICK_USAGE_ID; // L3
             usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID; // R3
 
-            leftAnalogXMap = kHIDUsage_GD_X;
-            leftAnalogYMap = kHIDUsage_GD_Y;
-            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
-            rightAnalogXMap = kHIDUsage_GD_Z;
-            rightAnalogYMap = kHIDUsage_GD_Rz;
-            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
+            leftThumbXMap = kHIDUsage_GD_X;
+            leftThumbYMap = kHIDUsage_GD_Y;
+            leftTriggerMap = kHIDUsage_GD_Rx;
+            rightThumbXMap = kHIDUsage_GD_Z;
+            rightThumbYMap = kHIDUsage_GD_Rz;
+            rightTriggerMap = kHIDUsage_GD_Ry;
         }
         else if (vendorId == 0x045E && productId == 0x02d1) // Xbox One controller
         {
@@ -236,12 +236,12 @@ public:
             usageMap[14] = DPAD_LEFT_USAGE_ID;
             usageMap[15] = DPAD_RIGHT_USAGE_ID;
 
-            leftAnalogXMap = kHIDUsage_GD_X;
-            leftAnalogYMap = kHIDUsage_GD_Y;
-            leftTriggerAnalogMap = kHIDUsage_GD_Ry;
-            rightAnalogXMap = kHIDUsage_GD_Z;
-            rightAnalogYMap = kHIDUsage_GD_Rx;
-            rightTriggerAnalogMap = kHIDUsage_GD_Rz;
+            leftThumbXMap = kHIDUsage_GD_X;
+            leftThumbYMap = kHIDUsage_GD_Y;
+            leftTriggerMap = kHIDUsage_GD_Ry;
+            rightThumbXMap = kHIDUsage_GD_Z;
+            rightThumbYMap = kHIDUsage_GD_Rx;
+            rightTriggerMap = kHIDUsage_GD_Rz;
         }
         else if ((vendorId == 0x0E6F && productId == 0x0113) || // AfterglowGamepadforXbox360
                  (vendorId == 0x0E6F && productId == 0x0213) || // AfterglowGamepadforXbox360
@@ -331,12 +331,12 @@ public:
             usageMap[14] = DPAD_LEFT_USAGE_ID;
             usageMap[15] = DPAD_RIGHT_USAGE_ID;
 
-            leftAnalogXMap = kHIDUsage_GD_X;
-            leftAnalogYMap = kHIDUsage_GD_Y;
-            leftTriggerAnalogMap = kHIDUsage_GD_Z;
-            rightAnalogXMap = kHIDUsage_GD_Rx;
-            rightAnalogYMap = kHIDUsage_GD_Ry;
-            rightTriggerAnalogMap = kHIDUsage_GD_Rz;
+            leftThumbXMap = kHIDUsage_GD_X;
+            leftThumbYMap = kHIDUsage_GD_Y;
+            leftTriggerMap = kHIDUsage_GD_Z;
+            rightThumbXMap = kHIDUsage_GD_Rx;
+            rightThumbYMap = kHIDUsage_GD_Ry;
+            rightTriggerMap = kHIDUsage_GD_Rz;
         }
         else // Generic (based on Logitech Rum/blePad 2)
         {
@@ -353,12 +353,12 @@ public:
             usageMap[11] = LEFT_THUMBSTICK_USAGE_ID;
             usageMap[12] = RIGHT_THUMBSTICK_USAGE_ID;
 
-            leftAnalogXMap = kHIDUsage_GD_X;
-            leftAnalogYMap = kHIDUsage_GD_Y;
-            leftTriggerAnalogMap = kHIDUsage_GD_Rx;
-            rightAnalogXMap = kHIDUsage_GD_Z;
-            rightAnalogYMap = kHIDUsage_GD_Rz;
-            rightTriggerAnalogMap = kHIDUsage_GD_Ry;
+            leftThumbXMap = kHIDUsage_GD_X;
+            leftThumbYMap = kHIDUsage_GD_Y;
+            leftTriggerMap = kHIDUsage_GD_Rx;
+            rightThumbXMap = kHIDUsage_GD_Z;
+            rightThumbYMap = kHIDUsage_GD_Rz;
+            rightTriggerMap = kHIDUsage_GD_Ry;
         }
 
         CFArrayRef elementArray = IOHIDDeviceCopyMatchingElements(device, NULL, kIOHIDOptionsTypeNone);
@@ -446,7 +446,12 @@ public:
             }
             else if (gamepadElement->getType() == GamepadElement::Type::ANALOG)
             {
-                //std::cout << "Analog value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == leftThumbXMap) std::cout << "Left thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == leftThumbYMap) std::cout << "Left thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == leftTriggerMap) std::cout << "Left trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == rightThumbXMap) std::cout << "Right thumb X value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == rightThumbYMap) std::cout << "Right thumb Y value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
+                if (gamepadElement->getUsage() == rightTriggerMap) std::cout << "Right trigger value: " << gamepadElement->normalizeValue(integerValue) << std::endl;
             }
         }
     }
@@ -460,12 +465,12 @@ protected:
     uint64_t vendorId = 0;
     uint64_t productId = 0;
     UsageID usageMap[24];
-    uint32_t leftAnalogXMap = 0;
-    uint32_t leftAnalogYMap = 0;
-    uint32_t leftTriggerAnalogMap = 0;
-    uint32_t rightAnalogXMap = 0;
-    uint32_t rightAnalogYMap = 0;
-    uint32_t rightTriggerAnalogMap = 0;
+    uint32_t leftThumbXMap = 0;
+    uint32_t leftThumbYMap = 0;
+    uint32_t leftTriggerMap = 0;
+    uint32_t rightThumbXMap = 0;
+    uint32_t rightThumbYMap = 0;
+    uint32_t rightTriggerMap = 0;
 };
 
 std::map<IOHIDDeviceRef, std::shared_ptr<Gamepad>> gamepads;
